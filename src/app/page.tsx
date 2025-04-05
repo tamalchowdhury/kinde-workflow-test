@@ -1,8 +1,16 @@
 import Link from "next/link";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-export default function Home() {
+export default async function Home() {
+  const { getAccessToken } = getKindeServerSession();
+  const token = await getAccessToken();
+
   return (
     <div className="container">
+      <pre className="p-4 rounded-lg bg-slate-900 text-lime-200">
+        <code>{JSON.stringify(token, null, 2)}</code>
+      </pre>
+
       <div className="card hero">
         <p className="text-display-1 hero-title">
           Let’s start authenticating <br /> with KindeAuth
